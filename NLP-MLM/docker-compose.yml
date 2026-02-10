@@ -1,0 +1,6 @@
+services:
+  mlm-demo:
+    build: .
+    ports:
+      - "8090:80"
+    restart: unless-stopped

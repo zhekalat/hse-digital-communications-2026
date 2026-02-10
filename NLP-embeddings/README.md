@@ -4,13 +4,45 @@
 
 ## 🚀 Быстрый старт
 
-### 1. Установка зависимостей
+### Вариант 1: Запуск с Docker (Рекомендуется)
+
+#### С помощью Docker Compose (проще)
+
+```bash
+docker-compose up
+```
+
+#### Или напрямую через Docker
+
+```bash
+# Собрать образ
+docker build -t nlp-embeddings-demo .
+
+# Запустить контейнер
+docker run -p 8501:8501 nlp-embeddings-demo
+```
+
+Приложение будет доступно по адресу `http://localhost:8501`
+
+#### Остановка
+
+```bash
+# Если используете docker-compose
+docker-compose down
+
+# Если используете docker run
+docker stop nlp-embeddings-demo
+```
+
+### Вариант 2: Локальный запуск
+
+#### 1. Установка зависимостей
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Запуск приложения
+#### 2. Запуск приложения
 
 ```bash
 streamlit run embeddings_demo.py
@@ -94,3 +126,66 @@ def load_embeddings():
 4. Добавить возможность ввода произвольных слов
 5. Показать изменение эмбеддингов от контекста (BERT)
 6. Добавить визуализацию внимания (attention)
+
+## ☁️ Деплой в облако
+
+### Deploy на Render.com
+
+1. Создайте аккаунт на [Render.com](https://render.com)
+2. Подключите ваш GitHub репозиторий
+3. Создайте новый Web Service
+4. Настройте параметры:
+   - **Build Command:** `docker build -t app .`
+   - **Start Command:** `docker run -p 8501:8501 app`
+   - **Port:** `8501`
+
+### Deploy на Railway.app
+
+1. Создайте аккаунт на [Railway.app](https://railway.app)
+2. Нажмите "New Project" → "Deploy from GitHub repo"
+3. Выберите ваш репозиторий
+4. Railway автоматически определит Dockerfile
+5. Установите переменную окружения `PORT=8501`
+
+### Deploy на Google Cloud Run
+
+```bash
+# Установите Google Cloud CLI
+gcloud auth login
+
+# Соберите и загрузите образ
+gcloud builds submit --tag gcr.io/YOUR_PROJECT_ID/nlp-embeddings-demo
+
+# Деплой
+gcloud run deploy nlp-embeddings-demo \
+  --image gcr.io/YOUR_PROJECT_ID/nlp-embeddings-demo \
+  --platform managed \
+  --region us-central1 \
+  --allow-unauthenticated \
+  --port 8501
+```
+
+### Deploy на AWS ECS/Fargate
+
+```bash
+# Установите AWS CLI и войдите
+aws ecr create-repository --repository-name nlp-embeddings-demo
+
+# Соберите и загрузите образ
+docker build -t nlp-embeddings-demo .
+docker tag nlp-embeddings-demo:latest YOUR_ACCOUNT.dkr.ecr.REGION.amazonaws.com/nlp-embeddings-demo:latest
+docker push YOUR_ACCOUNT.dkr.ecr.REGION.amazonaws.com/nlp-embeddings-demo:latest
+
+# Создайте задачу и сервис в ECS Console
+```
+
+### Deploy на Fly.io
+
+```bash
+# Установите Fly CLI
+fly auth login
+
+# Инициализация и деплой
+fly launch
+fly deploy
+```
