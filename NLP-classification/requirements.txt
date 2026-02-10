@@ -1,0 +1,22 @@
+# Основные библиотеки для анализа данных
+pandas>=2.0.0
+numpy>=1.24.0
+scikit-learn>=1.3.0
+
+# Библиотеки для работы с текстом
+nltk>=3.8.0
+gensim>=4.3.0
+
+# Прогресс-бары
+tqdm>=4.65.0
+
+# PyTorch (для BERT)
+torch>=2.0.0
+
+# Transformers и Accelerate (для BERT)
+# Для Python 3.13+ требуются более новые версии
+transformers>=4.45.0
+accelerate>=0.35.0
+
+# Дополнительно для Jupyter
+ipywidgets>=8.0.0

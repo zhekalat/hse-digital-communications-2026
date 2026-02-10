@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLM Игра - Заполни пропуски</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 MLM: Masked Language Modeling</h1>
+            <p class="subtitle">Интерактивная игра для понимания работы языковых моделей</p>
+        </header>
+
+        <div class="info-panel">
+            <div class="info-item">
+                <span class="label">Заполнено:</span>
+                <span class="value" id="filled-count">0</span>/<span id="total-count">0</span>
+            </div>
+            <div class="info-item">
+                <span class="label">Правильно:</span>
+                <span class="value correct" id="correct-count">0</span>
+            </div>
+            <div class="info-item">
+                <span class="label">Текущий текст:</span>
+                <span class="value" id="current-text-number">1</span>/<span id="total-texts">5</span>
+            </div>
+        </div>
+
+        <div class="text-selector">
+            <button class="text-btn" onclick="loadText(0)">Текст 1</button>
+            <button class="text-btn" onclick="loadText(1)">Текст 2</button>
+            <button class="text-btn" onclick="loadText(2)">Текст 3</button>
+            <button class="text-btn" onclick="loadText(3)">Текст 4</button>
+            <button class="text-btn" onclick="loadText(4)">Текст 5</button>
+        </div>
+
+        <div class="game-area">
+            <div class="text-container" id="text-container">
+                <!-- Текст с пропусками будет загружен здесь -->
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-primary" onclick="checkAnswers()">Проверить ответы</button>
+            <button class="btn btn-secondary" onclick="showHints()">Показать подсказки</button>
+            <button class="btn btn-secondary" onclick="revealAnswers()">Показать правильные ответы</button>
+            <button class="btn btn-reset" onclick="resetGame()">Сбросить</button>
+        </div>
+
+        <div class="explanation">
+            <h3>📚 Как работает MLM?</h3>
+            <p>
+                <strong>Masked Language Modeling (MLM)</strong> — это метод обучения языковых моделей, 
+                при котором часть слов в тексте скрывается (маскируется), а модель должна их предсказать 
+                на основе контекста. Именно так обучались модели BERT, RoBERTa и многие другие.
+            </p>
+            <p>
+                В этой игре вы выступаете в роли языковой модели: попробуйте заполнить пропуски, 
+                используя контекст слева и справа от пропущенного слова. Это поможет вам понять, 
+                как работают современные NLP-системы!
+            </p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
